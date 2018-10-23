@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'roboto';
+}
+
+body {
+    padding-top: 64px;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 10px;
+}
+.list-count {
+    color: rgba(0,0,0,0.87);
+    font: 400 14px/20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+

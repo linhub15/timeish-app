@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput type="text" placeholder="First Name" aria-label="First Name"
+    [(ngModel)]="data.employee.firstName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Last Name" aria-label="Last Name"
+    [(ngModel)]="data.employee.lastName">
+  </mat-form-field>
+
+  <mat-form-field id="email">
+    <input matInput type="email" placeholder="Email" aria-label="Email"
+    [(ngModel)]="data.employee.email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Hourly Pay" aria-label="Hourly Pay"
+    [(ngModel)]="data.employee.hourlyPay">
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="submitEmployee()" mat-dialog-close>{{data.submitAction}}</button>
+</mat-dialog-actions>

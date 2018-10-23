@@ -1,0 +1,14 @@
+mat-dialog-content {
+    width: 400px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+mat-form-field {
+    margin: 0 10px 10px 10px;
+}
+
+#email {
+    width: 100%;
+}

@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="list-count">Employees ({{employees?.length}})</h2>
+  <mat-list role="rowgroup">
+    <mat-list-item #employees *ngFor="let employee of employees" (click)="openEditDialog(employee)">
+      <div class="list-item">
+          <div class="name">{{employee.fullName()}}</div>
+          <div class="email">{{employee.email}}</div>
+          <div class="pay">${{employee.hourlyPay}} / Hour</div>
+          <button class="icon-btn" mat-icon-button
+            (click)="deleteEmployee(employee)">
+            <mat-icon matListIcon>delete</mat-icon></button>
+    </div>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<button id="addNewEmployee" mat-fab color="primary"
+  (click)="openAddDialog()">
+  <mat-icon>add</mat-icon></button>

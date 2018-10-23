@@ -1,0 +1,33 @@
+
+<div>
+  <mat-card>
+    <mat-card-header>
+        <mat-card-title>{{timeSheet?.employee.fullName()}}</mat-card-title>
+        <mat-card-subtitle>October 1 - October 31, 2018 //TODO: Payperiod goes here</mat-card-subtitle>
+    </mat-card-header>
+    <div class="time-sheet-summary">
+        <p>Total Hours: {{timeSheet?.totalHours()}}</p>
+        <p>Total Pay: ${{timeSheet?.totalPay()}}</p>
+        <mat-chip-list>
+          <mat-chip>Status: {{timeSheet?.status()}}</mat-chip>
+        </mat-chip-list>
+    </div>
+    <mat-divider [inset]="true"></mat-divider>
+    <mat-list>
+        <h3 mat-subheader>Activities</h3>
+        <app-activity #activities *ngFor="let activity of timeSheet?.activities"
+            [activity]="activity"
+            [isSubmitted]="(this.timeSheet?.submitted)"
+            [hourlyPay]="timeSheet?.employee.hourlyPay"
+            (deleteActivity)="deleteActivity($event)" 
+            (addActivity)="addActivity()"></app-activity>
+      </mat-list>
+      <mat-card-actions *ngIf="!this.timeSheet?.submitted">
+          <button mat-button
+          (click)="save()">Save</button>
+      <button mat-button color="primary"
+          (click)="submit()">Submit</button>
+      </mat-card-actions>
+  </mat-card>
+
+</div>

@@ -1,0 +1,29 @@
+<div *ngFor="let timeSheet of timeSheets">
+
+  <mat-card class="flex-row" mat-ripple (click)="openReviewDialog(timeSheet)">
+    <div class="timeSheet">
+
+      <h3 class="name">{{timeSheet.employee.fullName()}}</h3>
+
+      <span>${{timeSheet.totalPay()}}</span>
+
+      <mat-chip-list>
+        <mat-chip>{{timeSheet.status()}}</mat-chip>
+      </mat-chip-list>
+
+    </div>
+
+    <div class="card-actions">
+      <button mat-icon-button
+          routerLink="/timesheets/{{timeSheet.id}}"
+          [disabled]="timeSheet.status() === 'Submitted' || timeSheet.status() === 'Approved'">
+        <mat-icon>edit</mat-icon></button>
+      <button mat-icon-button color="warning"
+          (click)="deleteTimeSheet(timeSheet)">
+        <mat-icon>delete</mat-icon></button>
+    </div>
+  </mat-card>
+
+</div>
+<button id="addTimeSheet" mat-fab color="primary" aria-label="Add Time Sheet"
+    (click)="openAddDialog()"><mat-icon>add</mat-icon></button>

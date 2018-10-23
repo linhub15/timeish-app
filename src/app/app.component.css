@@ -1,0 +1,12 @@
+mat-sidenav-container {
+    height: 100%;
+}
+mat-sidenav {
+    width: 300px;
+}
+
+mat-list-item {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
