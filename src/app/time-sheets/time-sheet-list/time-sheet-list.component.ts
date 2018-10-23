@@ -4,11 +4,10 @@ import { MatDialog } from '@angular/material';
 import { TimeSheet } from '../../models/time-sheet.model';
 
 import { TimeSheetsService } from '../time-sheets.service';
-import { EmployeeService } from 'src/app/employees/employee.service';
+import { EmployeeService } from '../../employees/employee.service';
 
 import { AddTimeSheetDialogComponent } from '../add-time-sheet-dialog/add-time-sheet-dialog.component';
 import { ReviewTimeSheetDialogComponent, ReviewDialogData } from '../review-time-sheet-dialog/review-time-sheet-dialog.component';
-import { Employee } from 'src/app/models/employee.model';
 
 @Component({
   selector: 'app-time-sheet-list',

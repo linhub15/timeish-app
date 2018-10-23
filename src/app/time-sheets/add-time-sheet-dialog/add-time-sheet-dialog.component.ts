@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Employee } from 'src/app/models/employee.model';
-import { TimeSheet } from 'src/app/models/time-sheet.model';
+import { Employee } from '../../models/employee.model';
+import { TimeSheet } from '../../models/time-sheet.model';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
