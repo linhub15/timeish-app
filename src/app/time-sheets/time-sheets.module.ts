@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { SharedModule } from '../shared/shared.module';
 import { TimeSheetsRoutingModule } from './time-sheets-routing.module';
-
 /* Components */
 import { TimeSheetListComponent } from './time-sheet-list/time-sheet-list.component';
 import { TimeSheetComponent } from './time-sheet/time-sheet.component';

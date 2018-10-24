@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Employee, TimeSheet } from '../../core';
-import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+
+import { Employee, TimeSheet } from '../../core';
+
 
 export interface DialogData {
   employees$: Observable<Employee[]>;

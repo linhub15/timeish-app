@@ -2,11 +2,11 @@ import { Injectable, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+
 import { Deserializable } from "../models/deserializable.model";
 
-
 /**
- * @description Sends HTTP requests and deserializes responses
+ * Sends HTTP requests and deserializes responses
  */
 @Injectable()
 export class ApiService implements OnInit {

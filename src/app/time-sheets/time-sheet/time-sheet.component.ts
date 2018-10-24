@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChildren, QueryList, AfterContentChecked, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { TimeSheet, TimeSheetsService } from '../../core';
 import { ActivityComponent } from '../activity/activity.component';
 

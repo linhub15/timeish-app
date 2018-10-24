@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { TimeSheet } from '../../core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { TimeSheet } from '../../core';
 
 export interface ReviewDialogData {
   approved: boolean;

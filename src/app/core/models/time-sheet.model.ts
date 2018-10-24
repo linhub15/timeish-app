@@ -1,7 +1,7 @@
 import { Activity } from "./activity.model";
-import { PayPeriod } from "./pay-period.model";
 import { Employee } from "./employee.model";
 import { Deserializable } from "./deserializable.model";
+import { PayPeriod } from "./pay-period.model";
 
 export class TimeSheet implements Deserializable{
     id: number;

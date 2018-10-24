@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Employee } from '../../core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+
+import { Employee } from '../../core';
 
 export class EmployeeDialogData {
   title: string;

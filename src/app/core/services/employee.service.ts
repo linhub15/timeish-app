@@ -1,7 +1,8 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Employee } from '../models/';
 import { Observable, of, from } from 'rxjs';
+
 import { ApiService } from './api.service';
+import { Employee } from '../models/';
 
 @Injectable()
 export class EmployeeService implements OnInit {

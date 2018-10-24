@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
+
 import { Employee, EmployeeService } from '../../core';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-employee-list',
