@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Employee } from '../models/';
 import { Observable, of, from } from 'rxjs';
-import { ApiService } from '.';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
