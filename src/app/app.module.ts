@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 /* App Root */
 import { AppComponent } from './app.component';
 
 /* Feature Modules */
-import { CoreModule } from './core/core.module';
+import { CoreModule } from './core';
 import { SharedModule } from './shared/shared.module';
 import { TimeSheetsModule } from './time-sheets/time-sheets.module';
 import { EmployeesModule } from './employees/employees.module';
@@ -14,12 +13,10 @@ import { EmployeesModule } from './employees/employees.module';
 /* Routing Module */
 import { AppRoutingModule } from './app-routing.module';
 
-
-
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    HttpClientModule,
     CoreModule,
     SharedModule,
     TimeSheetsModule,
@@ -27,7 +24,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
   ],
   providers: [],
-  declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,10 +5,16 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 
 /* Components */
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ApiService, EmployeeService, TimeSheetsService } from './services';
 
 
 @NgModule({
-  imports: [ CommonModule, SharedModule ],
+  imports: [ CommonModule, SharedModule],
+  providers: [
+    ApiService, 
+    EmployeeService, 
+    TimeSheetsService
+  ],
   declarations: [ToolbarComponent],
   exports: [ToolbarComponent]
 })

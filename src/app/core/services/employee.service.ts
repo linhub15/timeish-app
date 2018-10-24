@@ -3,9 +3,7 @@ import { Employee } from '../models/';
 import { Observable, of, from } from 'rxjs';
 import { ApiService } from './api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EmployeeService implements OnInit {
 
   readonly resource: string = 'employees'

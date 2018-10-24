@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { TimeSheet } from '../models';
 import { ApiService } from './api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TimeSheetsService {
   
   readonly type = TimeSheet;    // could be injected 

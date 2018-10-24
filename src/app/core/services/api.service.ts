@@ -8,9 +8,7 @@ import { Deserializable } from "../models/deserializable.model";
 /**
  * @description Sends HTTP requests and deserializes responses
  */
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService implements OnInit {
 
   // This will be passed in from variables...
