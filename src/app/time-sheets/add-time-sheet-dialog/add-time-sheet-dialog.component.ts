@@ -21,9 +21,7 @@ export class AddTimeSheetDialogComponent implements OnInit{
 
   constructor( 
     public dialogRef: MatDialogRef<AddTimeSheetDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      
-    }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
     this.data.employees$.subscribe(array => this.employees = array);
@@ -36,6 +34,7 @@ export class AddTimeSheetDialogComponent implements OnInit{
   }
 
   private _filter(value: string): Employee[] {
+    if (typeof value !== 'string') { return [] }
     const filterValue = value.toLowerCase();
     return this.employees.filter(
         option => option.fullName().toLocaleLowerCase().indexOf(filterValue) === 0);

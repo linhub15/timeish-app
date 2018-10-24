@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Employee, EmployeeService } from '../../core';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,8 +10,10 @@ import { MatDialog } from '@angular/material';
 })
 export class EmployeeListComponent implements OnInit {
    employees: Employee[];
-  constructor(private employeeService:EmployeeService,
-    public dialog: MatDialog) { }
+  constructor(
+    private employeeService:EmployeeService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.employeeService.getEmployees()
@@ -33,6 +35,7 @@ export class EmployeeListComponent implements OnInit {
       if (!employee) { return }
       this.employeeService.add(employee)
         .subscribe(e => this.employees.push(e))
+        this.snackBar.open('Added','', {duration: 2500});
     })
   }
   openEditDialog(employee: Employee): void {
@@ -50,6 +53,7 @@ export class EmployeeListComponent implements OnInit {
       this.employeeService.update(dialogEmployee).subscribe();
       let index = this.employees.indexOf(employee);
       this.employees[index] = dialogEmployee;
+      this.snackBar.open('Saved','', {duration: 2500});
     });
   }
 
@@ -58,5 +62,6 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.delete(employee.id).subscribe();
     const index = this.employees.indexOf(employee);
     this.employees.splice(index, 1)
+    this.snackBar.open('Deleted','', {duration: 2500});
   }
 }

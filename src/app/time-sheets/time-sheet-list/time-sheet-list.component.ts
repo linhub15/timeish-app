@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { TimeSheet, TimeSheetsService, EmployeeService } from '../../core';
 
@@ -14,9 +14,11 @@ import { ReviewTimeSheetDialogComponent, ReviewDialogData } from '../review-time
 export class TimeSheetListComponent implements OnInit {
   timeSheets: TimeSheet[] = [];
   
-  constructor(private apiService:TimeSheetsService,
-      private employeeService: EmployeeService,
-      public dialog: MatDialog) { }
+  constructor(
+    private apiService:TimeSheetsService,
+    private employeeService: EmployeeService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar ) { }
 
   ngOnInit() {
     this.apiService.list()
@@ -48,6 +50,7 @@ export class TimeSheetListComponent implements OnInit {
           .subscribe(sheet => {
             sheet = new TimeSheet().deserialize(sheet);
             this.timeSheets.push(sheet);
+            this.openSnackBar('Time sheet added');
           });
     })
   }
@@ -60,10 +63,17 @@ export class TimeSheetListComponent implements OnInit {
     // Can receive Approval, delete, or not re-issue
     dialogRef.afterClosed().subscribe((data: ReviewDialogData) => {
       if (!data) { return } // clicked outside, nothing passed through
-      if (data.approved) {this.apiService.update(data.timeSheet).subscribe()}
+      if (data.approved) {
+        this.apiService.update(data.timeSheet).subscribe();
+        this.openSnackBar('Time sheet approved');
+      }
       else if (data.rejected) { } /* set it to be rejected */ 
       else if (data.deleted) {this.deleteTimeSheet(data.timeSheet)}
       else {/*Closed with no option selected*/}
     });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message,'',{ duration: 2500 })
   }
 }
