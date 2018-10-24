@@ -2,7 +2,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Deserializable } from "../core/models/deserializable.model";
+import { Deserializable } from "../models/deserializable.model";
 
 
 /**
@@ -11,7 +11,7 @@ import { Deserializable } from "../core/models/deserializable.model";
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService implements OnInit {
+export class ApiService implements OnInit {
 
   // This will be passed in from variables...
   readonly baseUrl = 'https://localhost:5001/api/';

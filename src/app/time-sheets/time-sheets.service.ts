@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { TimeSheet } from '../core/models/time-sheet.model';
-import { HttpService } from '../core/http.service';
+import { ApiService } from '../core/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class TimeSheetsService {
   readonly type = TimeSheet;    // could be injected 
   readonly resource: string = 'timesheets';  // could be injected
 
-  constructor(private http: HttpService) { }
+  constructor(private http: ApiService) { }
 
   // GET /api/timesheets
   list(): Observable<TimeSheet[]> {

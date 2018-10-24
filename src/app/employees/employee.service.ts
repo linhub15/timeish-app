@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Employee } from '../core/models/employee.model';
 import { Observable, of, from } from 'rxjs';
-import { HttpService } from '../core/http.service';
+import { ApiService } from '../core/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class EmployeeService implements OnInit {
 
   readonly resource: string = 'employees'
 
-  constructor(private api: HttpService) { }
+  constructor(private api: ApiService) { }
   ngOnInit() {}
   getEmployees(): Observable<Employee[]> {
     return this.api.list<Employee>(this.resource, Employee);
