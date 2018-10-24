@@ -11,7 +11,6 @@ import { ActivityComponent } from '../activity/activity.component';
 })
 export class TimeSheetComponent implements OnInit {
 
-  submitted: boolean;
   timeSheet: TimeSheet;
 
   @ViewChildren('activities') activities: QueryList<ActivityComponent>;
@@ -53,7 +52,6 @@ export class TimeSheetComponent implements OnInit {
 
   submit() {
     // Are you sure you want to submit? No more changes can be made
-    this.submitted = true;
     this.timeSheet.submitted = new Date();
     this.save();
   }

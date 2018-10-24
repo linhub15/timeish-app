@@ -14,30 +14,30 @@ export class TimeSheetListComponent implements OnInit {
   timeSheets: TimeSheet[] = [];
   
   constructor(
-    private apiService:TimeSheetsService,
+    private timeSheetService:TimeSheetsService,
     private employeeService: EmployeeService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar ) { }
 
   ngOnInit() {
-    this.apiService.list()
+    this.timeSheetService.list()
         .subscribe(array => this.timeSheets = array);
   }
 
   deleteTimeSheet(timeSheet: TimeSheet): void {
     const id = this.timeSheets.indexOf(timeSheet);
     this.timeSheets.splice(id, 1);
-    this.apiService.deleteTimeSheet(timeSheet.id);
+    this.timeSheetService.deleteTimeSheet(timeSheet.id);
   }
 
-  statusIcon(status: string) {
+  statusIcon(status: string): string {
     if (status === 'Issued') { return 'panorama_fish_eye' }
     else if (status === 'Submitted') { return 'check_circle_outline' }
     else if (status === 'Approved') { return 'check_circle' }
     else { return '' }
   }
   openAddDialog(): void {
-    let employees$ = this.employeeService.getEmployees(); //.subscribe(res => this.employees = res);
+    let employees$ = this.employeeService.getEmployees();
     const dialogRef = this.dialog.open(AddTimeSheetDialogComponent, {
       autoFocus: false,
       data: {employees$: employees$}
@@ -45,7 +45,7 @@ export class TimeSheetListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(timeSheet => {
       if (!timeSheet) { return }
-      this.apiService.add(timeSheet)
+      this.timeSheetService.add(timeSheet)
           .subscribe(sheet => {
             sheet = new TimeSheet().deserialize(sheet);
             this.timeSheets.push(sheet);
@@ -63,7 +63,7 @@ export class TimeSheetListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data: ReviewDialogData) => {
       if (!data) { return } // clicked outside, nothing passed through
       if (data.approved) {
-        this.apiService.update(data.timeSheet).subscribe();
+        this.timeSheetService.update(data.timeSheet).subscribe();
         this.openSnackBar('Time sheet approved');
       }
       else if (data.rejected) { } /* set it to be rejected */ 

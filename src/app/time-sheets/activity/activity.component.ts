@@ -16,8 +16,6 @@ export class ActivityComponent {
 
   constructor() { }
 
-  ngOnInit() { }
-
   calculatePay(): void {
     this.activity.pay = this.hourlyPay * this.activity.hours;
   }
