@@ -1,4 +1,6 @@
-# Timeish - a small business time sheet management web app
+# Timeish App - a small business time sheet management web app
+
+The backend API can be found [here](https://github.com/linhub15/timeish-api)
 
 ## Installation
 * Download Node.js v8.12.0 [Here](https://nodejs.org/en/)
