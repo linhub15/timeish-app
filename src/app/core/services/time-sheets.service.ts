@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TimeSheet } from '../core/models/time-sheet.model';
-import { ApiService } from '../core/';
+import { TimeSheet } from '../models';
+import { ApiService } from '.';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { TimeSheet } from '../../core/models/time-sheet.model';
-
-import { TimeSheetsService } from '../time-sheets.service';
+import { TimeSheet, TimeSheetsService } from '../../core';
 import { EmployeeService } from '../../employees/employee.service';
 
 import { AddTimeSheetDialogComponent } from '../add-time-sheet-dialog/add-time-sheet-dialog.component';
