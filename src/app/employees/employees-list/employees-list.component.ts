@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Employee } from '../../core/models/employee.model';
-import { EmployeeService } from '../employee.service';
+import { Employee, EmployeeService } from '../../core';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
 import { MatDialog } from '@angular/material';
 
