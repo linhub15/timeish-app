@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 /* Components */
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ApiService, EmployeeService, TimeSheetsService } from './services';
 
 
@@ -15,8 +14,8 @@ import { ApiService, EmployeeService, TimeSheetsService } from './services';
     EmployeeService, 
     TimeSheetsService
   ],
-  declarations: [ToolbarComponent],
-  exports: [ToolbarComponent]
+  declarations: [],
+  exports: []
 })
 export class CoreModule {
 

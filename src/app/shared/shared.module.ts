@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialComponentsModule } from './material-components.module';
+
 import { DatePickerComponent } from './date-picker/date-picker.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   imports: [ 
@@ -14,13 +16,14 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
     HttpClientModule,
     MaterialComponentsModule,
   ],
-  declarations: [DatePickerComponent],
+  declarations: [DatePickerComponent, ToolbarComponent],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialComponentsModule,
-    DatePickerComponent
+    DatePickerComponent,
+    ToolbarComponent
   ]
 })
 export class SharedModule { }
