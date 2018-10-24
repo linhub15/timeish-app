@@ -4,11 +4,11 @@ import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.comp
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-employees-list',
-  templateUrl: './employees-list.component.html',
-  styleUrls: ['./employees-list.component.css']
+  selector: 'app-employee-list',
+  templateUrl: './employee-list.component.html',
+  styleUrls: ['./employee-list.component.css']
 })
-export class EmployeesListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit {
    employees: Employee[];
   constructor(private employeeService:EmployeeService,
     public dialog: MatDialog) { }
