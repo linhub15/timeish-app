@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { TimeSheet } from '../../models/time-sheet.model';
+import { TimeSheet } from '../../core/models/time-sheet.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 

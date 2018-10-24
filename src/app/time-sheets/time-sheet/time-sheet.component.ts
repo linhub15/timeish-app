@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList, AfterContentChecked, AfterViewChecked } from '@angular/core';
-import { TimeSheet } from '../../models/time-sheet.model';
+import { TimeSheet } from '../../core/models/time-sheet.model';
 import { ActivatedRoute } from '@angular/router';
 import { TimeSheetsService } from '../time-sheets.service';
 import { ActivityComponent } from '../activity/activity.component';

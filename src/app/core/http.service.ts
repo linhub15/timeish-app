@@ -2,7 +2,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Deserializable } from "../models/deserializable.model";
+import { Deserializable } from "../core/models/deserializable.model";
 
 
 /**

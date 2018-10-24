@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TimeSheet } from '../models/time-sheet.model';
+import { TimeSheet } from '../core/models/time-sheet.model';
 import { HttpService } from '../core/http.service';
 
 @Injectable({

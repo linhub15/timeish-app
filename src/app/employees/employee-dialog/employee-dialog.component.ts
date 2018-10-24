@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Employee } from '../../models/employee.model';
+import { Employee } from '../../core/models/employee.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 export class EmployeeDialogData {
