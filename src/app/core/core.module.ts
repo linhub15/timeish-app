@@ -1,6 +1,7 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { throwIfAlreadyLoaded } from './module-import-guard';
 
 /* Components */
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -13,10 +14,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 })
 export class CoreModule {
 
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    if (parentModule) {
-      throw new Error(
-        'CoreModule is already loaded. Import it in the AppModule only');
-    }
+  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }
