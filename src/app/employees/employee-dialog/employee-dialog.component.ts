@@ -1,7 +1,9 @@
-import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { Employee } from '../../core';
+
 
 export class EmployeeDialogData {
   title: string;
@@ -15,17 +17,35 @@ export class EmployeeDialogData {
   templateUrl: './employee-dialog.component.html',
   styleUrls: ['./employee-dialog.component.css'],
 })
-export class EmployeeDialogComponent implements OnInit, OnChanges {
+export class EmployeeDialogComponent {
+  employeeForm = new FormGroup({
+    firstName: new FormControl(this.data.employee.firstName, 
+      Validators.required),
+    lastName: new FormControl(this.data.employee.lastName, 
+      Validators.required),
+    email: new FormControl(this.data.employee.email, 
+      [Validators.required, Validators.email]),
+    hourlyPay: new FormControl(this.data.employee.hourlyPay, 
+      [Validators.required, Validators.min(0), Validators.max(100)])
+  });
+
 
   constructor(
     public dialogRef: MatDialogRef<EmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EmployeeDialogData) { }
 
-
-  ngOnInit() { }
-  ngOnChanges(changes: SimpleChanges) { }
-  
   submitEmployee() {
+    if (!this.employeeForm.valid) { return } // invalid form
+    this.data.employee.deserialize(this.employeeForm.value);
     this.dialogRef.close(this.data.employee);
+  }
+
+  getErrorMessage(formControlName: string) : string {
+    const control = this.employeeForm.controls[formControlName];
+    if (control.hasError('required')) { return 'Required' }
+    else if (control.hasError('email')) { return 'Not a valid email' }
+    else if (control.hasError('min')) { return 'Must be 0 or greater'}
+    else if (control.hasError('max')) { return 'Must be 100 or less'}
+    else { return '' }
   }
 }

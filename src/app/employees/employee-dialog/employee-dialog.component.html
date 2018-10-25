@@ -1,27 +1,37 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
-<mat-dialog-content>
-  <mat-form-field>
-    <input matInput type="text" placeholder="First Name" aria-label="First Name"
-    [(ngModel)]="data.employee.firstName">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput type="text" placeholder="Last Name" aria-label="Last Name"
-    [(ngModel)]="data.employee.lastName">
-  </mat-form-field>
-
-  <mat-form-field id="email">
-    <input matInput type="email" placeholder="Email" aria-label="Email"
-    [(ngModel)]="data.employee.email">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Hourly Pay" aria-label="Hourly Pay"
-    [(ngModel)]="data.employee.hourlyPay">
-  </mat-form-field>
-
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)="submitEmployee()" mat-dialog-close>{{data.submitAction}}</button>
-</mat-dialog-actions>
+<form [formGroup]="employeeForm" (ngSubmit)="submitEmployee()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput type="text" placeholder="First Name" aria-label="First Name"
+      formControlName="firstName">
+      <mat-error *ngIf="employeeForm.controls['firstName'].invalid">
+        {{getErrorMessage('firstName')}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput type="text" placeholder="Last Name" aria-label="Last Name"
+      formControlName="lastName">
+      <mat-error *ngIf="employeeForm.controls['lastName'].invalid">
+        {{getErrorMessage('lastName')}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field id="email">
+      <input matInput type="email" placeholder="Email" aria-label="Email"
+      formControlName="email">
+      <mat-error *ngIf="employeeForm.controls['email'].invalid">
+        {{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput type="number" placeholder="Hourly Pay" aria-label="Hourly Pay"
+      formControlName="hourlyPay">
+      <mat-error *ngIf="employeeForm.controls['hourlyPay'].invalid">
+        {{getErrorMessage('hourlyPay')}}</mat-error>
+    </mat-form-field>
+  
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+    <button mat-button type="submit" [disabled]="employeeForm.pristine">{{data.submitAction}}</button>
+  </mat-dialog-actions>
+</form>
