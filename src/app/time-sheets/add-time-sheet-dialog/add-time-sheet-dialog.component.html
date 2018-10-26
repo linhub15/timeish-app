@@ -1,18 +1,21 @@
+<form [formGroup]="newTimeSheetForm" (ngSubmit)="addNewTimeSheet()">
 <h2 mat-dialog-title>Add Time Sheet</h2>
 <mat-dialog-content>
   <mat-form-field>
     <input matInput type="text" placeholder="Employee Name" aria-label="Employee" [matAutocomplete]="auto"
-     [formControl]="employeeInput" [autofocus]="false" (blur)="autoComplete()">
+     formControlName="employeeInput" [autofocus]="false" (blur)="autoComplete()">
+     <mat-error *ngIf="newTimeSheetForm.controls['employeeInput'].invalid">{{getErrorMessage('employeeInput')}}</mat-error>
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFullName">
-      <mat-option *ngFor="let employee of (filteredOptions$ | async)" [value]="employee">
+      <mat-option *ngFor="let employee of filteredOptions$ | async" [value]="employee">
         {{employee.fullName()}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button type="button" mat-dialog-close>Cancel</button>
   <!-- The mat-dialog-close directive optionally accepts a
      value as a result for the dialog. -->
-  <button mat-button (click)="addNewTimeSheet()" mat-dialog-close>Add</button>
+  <button mat-button type="submit" [disabled]="">Add</button>
 </mat-dialog-actions>
+</form>

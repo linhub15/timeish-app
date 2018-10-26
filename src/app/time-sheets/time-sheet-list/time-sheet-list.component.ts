@@ -47,7 +47,6 @@ export class TimeSheetListComponent implements OnInit {
       if (!timeSheet) { return }
       this.timeSheetService.add(timeSheet)
           .subscribe(sheet => {
-            sheet = new TimeSheet().deserialize(sheet);
             this.timeSheets.push(sheet);
             this.openSnackBar('Time sheet added');
           });
