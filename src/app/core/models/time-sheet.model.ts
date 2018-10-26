@@ -13,8 +13,11 @@ export class TimeSheet implements Deserializable{
     employeeId: number;
     employee: Employee;
     activities: Activity[];
-
-    constructor() { }
+    
+    constructor(payPeriodId?: number, employeeId?: number) {
+        if (payPeriodId) { this.payPeriodId = payPeriodId }
+        if (employeeId) { this.employeeId = employeeId }
+    }
 
     deserialize(input: any) {
         input.employee = new Employee().deserialize(input.employee);

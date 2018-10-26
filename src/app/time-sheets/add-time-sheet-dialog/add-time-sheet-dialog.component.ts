@@ -61,7 +61,7 @@ export class AddTimeSheetDialogComponent implements OnInit{
   addNewTimeSheet() {
     if (this.newTimeSheetForm.invalid) { return }
     const value: Employee = this.newTimeSheetForm.controls['employeeInput'].value;
-    const timeSheet = new TimeSheet();
+    const timeSheet = new TimeSheet(1, value.id);
     timeSheet.employeeId = value.id;
     this.dialogRef.close(timeSheet); 
   }
