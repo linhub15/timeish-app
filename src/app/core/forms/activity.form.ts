@@ -1,5 +1,6 @@
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Activity } from "../models";
+import { TimeSheetForm } from ".";
 
 export class ActivityForm extends FormGroup {
   private _id: number;
@@ -13,22 +14,23 @@ export class ActivityForm extends FormGroup {
     this._id = activity.id;
     
   }
-  toActivity(hourlyPay: number): Activity {
+  private _toActivity(): Activity {
     return new Activity().deserialize({
       id: this._id,
       date: this.controls['date'].value,
       description: this.controls['description'].value,
       hours: this.controls['hours'].value,
-      pay: this.getPay(hourlyPay, this.controls['hours'].value)
+      pay: this._getPay(this.controls['hours'].value)
     })
   }
-  getPay(hourlyPay: number, hours: number): number {
+  private _getPay(hours: number): number {
+    const hourlyPay = (<TimeSheetForm>this.parent.parent).timeSheet.employee.hourlyPay
     return hourlyPay * hours;
   }
 
-  static toActivity(forms: ActivityForm[], hourlyPay: number): Activity[] {
+  static toActivity(forms: ActivityForm[]): Activity[] {
     let activities: Activity[] = [];
-    forms.forEach(form => activities.push(form.toActivity(hourlyPay)))
+    forms.forEach(form => activities.push(form._toActivity()))
     return activities;
   }
 

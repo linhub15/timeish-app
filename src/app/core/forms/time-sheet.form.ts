@@ -1,4 +1,5 @@
 import { FormGroup, FormArray, FormControl } from "@angular/forms";
+
 import { ActivityForm } from "./activity.form";
 import { Activity, TimeSheet } from "../models";
 import { TimeSheetsService } from "../services";
@@ -14,30 +15,24 @@ export class TimeSheetForm extends FormGroup {
         super({activities: new FormArray([])});
 
         if (!timeSheet) { return }
-
         this.timeSheet = timeSheet;
         this.saved = true;
         this._activities = <FormArray>this.controls['activities'];
-        this._initForm();
-        
+        this._initForm();    
     }
 
     addActivity() {
         this._activities.push(new ActivityForm());
-        this._edited();
+        this._saved(false);
     }
 
-    /**
-     * 
-     * @param formToDeleteValue comes from event emitter $event
-     */
     deleteActivity(activityToDelete: number) {
         if (this._activities.length > 1) {
             const activityIndex = this._activities.controls.findIndex(
                 activity => activity.value == activityToDelete);
             this._activities.removeAt(activityIndex);
         }
-        this._edited();
+        this._saved(false);
     }
 
     saveChanges(apiService: TimeSheetsService) {
@@ -45,7 +40,7 @@ export class TimeSheetForm extends FormGroup {
         if(this.invalid) { return }
 
         const forms = <ActivityForm[]>this._activities.controls;
-        const changes = ActivityForm.toActivity(forms, this.timeSheet.employee.hourlyPay);
+        const changes = ActivityForm.toActivity(forms);
 
         this._deleteDifferences(changes, apiService);
         apiService.update(this.timeSheet).subscribe();
@@ -67,11 +62,8 @@ export class TimeSheetForm extends FormGroup {
       for (let i = 0; i < keys.length; i++) {
         const control = form.controls[keys[i]];
   
-        if (control instanceof FormControl) {
-          control.markAsTouched();
-        } else { // Assumes it is FormGroup or formArray
-          this.markFormTouched(control);
-        }
+        if (control instanceof FormControl) { control.markAsTouched() }
+        else { this.markFormTouched(control) }
       }
     }
 
@@ -82,15 +74,10 @@ export class TimeSheetForm extends FormGroup {
         }
         else { this._activities.push(new ActivityForm()) }
     }
-
-    private _edited() {
-        this.markAsDirty();
-        this.saved = false;
-    }
-
-    private _saved() {
-        this.markAsPristine();
-        this.saved = true;
+    
+    private _saved(saved: boolean = true) {
+        saved ? this.markAsPristine(): this.markAsDirty();
+        this.saved = saved;
     }
 
     private _deleteDifferences(changes: Activity[],apiService: TimeSheetsService) {

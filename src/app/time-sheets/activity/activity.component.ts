@@ -39,7 +39,6 @@ export class ActivityComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.isSubmitted) {this.activityForm.disable()}
-    this.activityForm.controls['date'].updateValueAndValidity();
   }
   
   showPay(): string {
