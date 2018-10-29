@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialComponentsModule } from './material-components.module';
-import { DatePickerComponent } from './date-picker/date-picker.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
@@ -15,13 +14,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     HttpClientModule,
     MaterialComponentsModule,
   ],
-  declarations: [DatePickerComponent, ToolbarComponent],
+  declarations: [ToolbarComponent],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialComponentsModule,
-    DatePickerComponent,
     ToolbarComponent
   ]
 })

@@ -1,18 +1,24 @@
-<mat-list-item>
+<mat-list-item [formGroup]="activityForm">
 
-  <app-date-picker [(ngModel)]="activity.date" id="date" [disabled]="isSubmitted">
-  </app-date-picker>
+  <mat-form-field id="date" (click)="picker.open()" floatLabel="never">
+    <input matInput readonly="readonly" placeholder="Select Date"
+        [matDatepicker]="picker" formControlName="date">
+    <mat-error *ngIf="activityForm.controls['date'].invalid">Required</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [disabled]="isSubmitted"></mat-datepicker>
+  </mat-form-field>
 
 
-  <mat-form-field floatLabel="never" id="description">
-    <input [(ngModel)]="activity.description"
-        matInput placeholder="Description" type="text" [disabled]="isSubmitted">
+  <mat-form-field id="description" floatLabel="never">
+    <input matInput formControlName="description"
+        placeholder="Description (Optional)" type="text">
   </mat-form-field>
 
 
   <mat-form-field floatLabel="never" id="hourlyPay">
-    <input matInput [(ngModel)]="activity.hours" [disabled]="isSubmitted"
-        id="hours" type="number" placeholder="Hours" min="0" max="24">
+    <input matInput formControlName="hours"
+        id="hours" type="number" placeholder="Hours">
+    <mat-error *ngIf="activityForm.controls['hours'].invalid">Required</mat-error>
     <div matSuffix id="pay" matTooltip="Pay" matTooltipPosition="above">
       {{showPay()}}</div>
   </mat-form-field>
@@ -25,6 +31,5 @@
       <button class="hidden-btn" mat-icon-button
       (click)="add()"><mat-icon>add</mat-icon></button>
   </div>
-  
   
 </mat-list-item>

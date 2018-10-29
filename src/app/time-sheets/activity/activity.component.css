@@ -31,8 +31,11 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-#date {
-    width: auto;
+#date:hover {
+    cursor: pointer;
+}
+#date input {
+    cursor: pointer;
 }
 #description {
     width: 23em;
