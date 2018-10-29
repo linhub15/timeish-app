@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ActivityForm } from 'src/app/core';
 
 export const MY_FORMATS = {
   parse: {
@@ -25,8 +25,7 @@ export const MY_FORMATS = {
   ]
 })
 export class ActivityComponent implements OnInit, OnChanges {
-  @Input() activityForm: FormGroup;
-  @Input() hourlyPay: number;
+  @Input() activityForm: ActivityForm;
   @Input() isSubmitted: boolean;
   @Output() deleteActivity = new EventEmitter<number>();
   @Output() addActivity = new EventEmitter<true>();
@@ -45,7 +44,7 @@ export class ActivityComponent implements OnInit, OnChanges {
     const hours = this.activityForm.controls['hours'];
     if (hours.value) {
       const hourString = hours.value > 1 ? 'Hours' : 'Hour';
-      const pay = this.hourlyPay * hours.value;
+      const pay = this.activityForm.getPay(hours.value);
       return hourString + ' ($' + pay + ')';
     }
   }

@@ -20,7 +20,6 @@
         <app-activity *ngFor="let form of timeSheetForm?.controls['activities'].controls"
             [activityForm]="form"
             [isSubmitted]="(timeSheetForm?.timeSheet.submitted)"
-            [hourlyPay]="timeSheetForm?.timeSheet?.employee.hourlyPay"
             (deleteActivity)="timeSheetForm?.deleteActivity($event)"
             (addActivity)="timeSheetForm?.addActivity()"></app-activity>
     </mat-list>
