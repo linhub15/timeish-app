@@ -10,3 +10,6 @@ mat-list-item {
     padding-right: 20px;
 }
 
+list-item-action {
+    justify-content: flex-end;
+}

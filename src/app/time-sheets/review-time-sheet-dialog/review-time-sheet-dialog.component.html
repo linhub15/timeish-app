@@ -59,6 +59,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="showActions()">
-  <button mat-button mat-dialog-close color="primary">Cancel</button>
-  <button mat-button (click)="approve()" mat-dialog-close>Approve</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="approve()" color="primary" mat-dialog-close>Approve</button>
 </mat-dialog-actions>

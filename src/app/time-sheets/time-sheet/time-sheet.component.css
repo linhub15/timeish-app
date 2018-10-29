@@ -6,3 +6,9 @@ mat-card {
 .time-sheet-summary {
     margin: 16px;
 }
+
+mat-card-actions {
+    padding: 1em;
+    display: flex;
+    justify-content: flex-end;
+}
