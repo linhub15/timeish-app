@@ -26,7 +26,7 @@
     <mat-card-actions *ngIf="!this.timeSheet?.submitted">
         <button mat-button type="button" [disabled]="timeSheetForm.pristine"
         (click)="save()">Save</button>
-        <button mat-button color="primary" type="button" [disabled]="timeSheetForm.invalid"
+        <button mat-button color="primary" type="button" [disabled]="timeSheetForm.dirty || !saved"
         (click)="submitTimeSheet()">Submit for approval</button>
     </mat-card-actions>
 

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators, AbstractControl } from '@angular/forms';
 
 import { TimeSheet, TimeSheetsService, Activity } from '../../core';
+import { MatSnackBar } from '@angular/material';
 
 export class ActivityForm extends FormGroup {
   private _id: number;
@@ -35,15 +36,18 @@ export class ActivityForm extends FormGroup {
   templateUrl: './time-sheet.component.html',
   styleUrls: ['./time-sheet.component.css']
 })
-export class TimeSheetComponent implements OnInit {
-  timeSheetForm: FormGroup = new FormGroup({
+export class TimeSheetComponent implements OnInit, OnChanges {
+
+  public saved = false;
+  public timeSheet: TimeSheet;
+  public timeSheetForm: FormGroup = new FormGroup({
     activities: new FormArray([])
   });
-  timeSheet: TimeSheet;
 
   constructor(
     private route: ActivatedRoute,
     private apiService: TimeSheetsService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -52,10 +56,14 @@ export class TimeSheetComponent implements OnInit {
     timeSheet$.subscribe(timeSheet => this.timeSheet = timeSheet);
     timeSheet$.subscribe(timeSheet => this.initActivities(timeSheet));
   }
+  ngOnChanges() {
+    this.saved = false;
+  }
 
   initActivities(timeSheet: TimeSheet) {
     const activities = this.getActivities();
-    if (timeSheet.activities.length > 0) { 
+    if (timeSheet.activities.length > 0) {
+      this.saved = true; // Pristine version of db activities
       timeSheet.activities.forEach(activity => {
         activities.push(new ActivityForm(activity));
       })
@@ -67,6 +75,8 @@ export class TimeSheetComponent implements OnInit {
   addActivity() {
     const activities = this.getActivities();
     activities.push(new ActivityForm());
+    this.timeSheetForm.markAsDirty();
+    this.saved = false;
   }
 
   /** Delete Activity Button */
@@ -76,17 +86,23 @@ export class TimeSheetComponent implements OnInit {
       const index = activities.controls.findIndex(arrayForm => arrayForm.value == activityFormValue);
       activities.removeAt(index);
     }
+    this.timeSheetForm.markAsDirty();
+    this.saved = false;
   }
 
   /** Save Button */
   save() {
     this.markFormTouched(this.timeSheetForm);
     if (this.timeSheetForm.invalid) { return }
+    
+
     const toDelete = this.refreshTimeSheetValuesFromForm();
     toDelete.forEach(activity => this.apiService.deleteActivity(activity.id));
-    this.apiService.update(this.timeSheet).subscribe();
-    if (this.timeSheet.activities.length === 0 ) { this.addActivity() }
     this.timeSheetForm.markAsPristine();
+
+    this.apiService.update(this.timeSheet).subscribe();
+    this.snackBar.open('Time sheet saved!', '',{duration: 2500});
+    this.saved = true;
   }
 
   /** Submit Button */
@@ -95,7 +111,8 @@ export class TimeSheetComponent implements OnInit {
     if (this.timeSheetForm.invalid) { return }
     // Are you sure you want to submit? No more changes can be made
     this.timeSheet.submitted = new Date();
-    this.save();
+    this.apiService.update(this.timeSheet).subscribe();
+    this.snackBar.open('Time sheet submitted for approval', '',{duration: 2500});
   }
 
   refreshTimeSheetValuesFromForm(): Activity[] {
