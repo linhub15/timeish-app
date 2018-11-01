@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TimeSheetsService, TimeSheetForm } from '../../core';
-import { SnackBarService, WarningDialogComponent, WarningDialogData } from '../../shared';
+import { SnackBarService, WarningDialogComponent } from '../../shared';
 import { MatDialog } from '@angular/material';
 
 

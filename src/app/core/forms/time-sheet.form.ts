@@ -43,17 +43,14 @@ export class TimeSheetForm extends FormGroup {
         const changes = ActivityForm.toActivity(forms);
 
         this._deleteDifferences(changes, apiService);
-        apiService.update(this.timeSheet).subscribe();
+        apiService.update(this.timeSheet).subscribe(timeSheet => this.timeSheet = timeSheet);
         this._saved();
         return true;
     }
 
     submitTimeSheet(apiService: TimeSheetsService) {
-        this.markFormTouched(this);
-        if(this.invalid) { return }
         this.timeSheet.submitted = new Date();
-        apiService.update(this.timeSheet).subscribe();
-        this._saved();
+        this.saveChanges(apiService);
     }
 
     // Temporary fix for angular/angular#19400
