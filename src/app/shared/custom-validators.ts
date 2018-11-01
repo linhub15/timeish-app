@@ -11,6 +11,7 @@ export class CustomValidators {
   }
 
   static noWhiteSpace: ValidatorFn = (control: FormControl): ValidationErrors | null => {
+    if (!control.value) { return null } // It's empty
     return control.value != control.value.toString().trim() ? {'hasWhiteSpace': true } : null;
   }
 }

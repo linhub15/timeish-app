@@ -1,7 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
 
 import { Employee } from '../../core';
 import { CustomValidators } from '../../shared/custom-validators';
@@ -17,7 +16,7 @@ export class EmployeeDialogData {
   templateUrl: './employee-dialog.component.html',
   styleUrls: ['./employee-dialog.component.css'],
 })
-export class EmployeeDialogComponent implements OnInit {
+export class EmployeeDialogComponent {
   employeeForm = new FormGroup({
     firstName: new FormControl(this.data.employee.firstName, 
       [Validators.required, CustomValidators.noWhiteSpace]),
@@ -28,16 +27,6 @@ export class EmployeeDialogComponent implements OnInit {
     hourlyPay: new FormControl(this.data.employee.hourlyPay, 
       [Validators.required, Validators.min(0), Validators.max(100)])
   });
-
-  ngOnInit() {
-    const firstNameControl = this.employeeForm.get('firstName');
-    firstNameControl.valueChanges
-      .pipe(map(val => val.trim()),
-      )
-      .subscribe();
-    this.employeeForm.get('lastName').valueChanges
-      .pipe(map(value => value.trim()))
-  }
 
   constructor(
     public dialogRef: MatDialogRef<EmployeeDialogComponent>,
