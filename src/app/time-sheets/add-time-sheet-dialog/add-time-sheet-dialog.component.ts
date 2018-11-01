@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormControl, Validators, FormGroup, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormControl, Validators, FormGroup, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 
 import { Employee, TimeSheet } from '../../core';
+import { CustomValidators } from '../../shared';
 
 
 export interface DialogData {
@@ -30,7 +31,7 @@ export class AddTimeSheetDialogComponent implements OnInit{
   employees: Employee[] = [];
   newTimeSheetForm = new FormGroup({
     employeeInput: new FormControl('', 
-    [Validators.required, isStringValidator])
+    [Validators.required, CustomValidators.isString])
   })
   filteredOptions$: Observable<Employee[]>;
 

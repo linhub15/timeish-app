@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { Employee, EmployeeService } from '../../core';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
+import { SnackBarService } from '../../shared';
+import { WarningDialogComponent } from '../../shared';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent implements OnInit {
    employees: Employee[];
   constructor(
     private employeeService:EmployeeService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar) { }
+    public snackBar: SnackBarService) { }
 
   ngOnInit() {
     this.employeeService.getEmployees()
@@ -36,7 +38,7 @@ export class EmployeeListComponent implements OnInit {
       if (!employee) { return }
       this.employeeService.add(employee)
         .subscribe(e => this.employees.push(e))
-        this.snackBar.open('Added','', {duration: 2500});
+        this.snackBar.open('Added!');
     })
   }
   openEditDialog(employee: Employee): void {
@@ -54,15 +56,26 @@ export class EmployeeListComponent implements OnInit {
       this.employeeService.update(dialogEmployee).subscribe();
       let index = this.employees.indexOf(employee);
       this.employees[index] = dialogEmployee;
-      this.snackBar.open('Saved','', {duration: 2500});
+      this.snackBar.open('Saved!');
     });
   }
 
   deleteEmployee(employee: Employee): void {
     if (!employee) { console.log("required param"); return; }
-    this.employeeService.delete(employee.id).subscribe();
-    const index = this.employees.indexOf(employee);
-    this.employees.splice(index, 1)
-    this.snackBar.open('Deleted','', {duration: 2500});
+    const dialogRef = this.dialog.open(WarningDialogComponent, {
+      autoFocus: false,
+      data: {
+        title: 'Are you sure?',
+        message: 'Deleting '+employee.fullName()+' will permanently delete all their time sheets too.', 
+        submitAction: 'Delete'}
+    });
+
+    dialogRef.afterClosed().subscribe(submitted => {
+      if (!submitted) {return}
+      this.employeeService.delete(employee.id).subscribe();
+      const index = this.employees.indexOf(employee);
+      this.employees.splice(index, 1)
+      this.snackBar.open('Deleted ' + employee.fullName() + '!');
+    })
   }
 }

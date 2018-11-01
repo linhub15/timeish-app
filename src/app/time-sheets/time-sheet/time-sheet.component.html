@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="timeSheetForm?.timeSheet; else errorMessage">
 
   <mat-card [formGroup]="timeSheetForm">
 
@@ -15,18 +15,21 @@
         </mat-chip-list>
     </div>
     <mat-divider [inset]="true"></mat-divider>
-    <mat-list>
-        <h3 mat-subheader>Activities</h3>
-        <app-activity *ngFor="let form of timeSheetForm?.controls['activities'].controls"
-            [activityForm]="form"
-            [isSubmitted]="(timeSheetForm?.timeSheet.submitted)"
-            (deleteActivity)="timeSheetForm?.deleteActivity($event)"
-            (addActivity)="timeSheetForm?.addActivity()"></app-activity>
-    </mat-list>
-    <mat-card-actions *ngIf="!this.timeSheet?.submitted">
+    <mat-card-content class="list">
+        <mat-list>
+            <h3 mat-subheader>Activities</h3>
+            <app-activity *ngFor="let form of timeSheetForm?.controls['activities'].controls"
+                [activityForm]="form"
+                [isSubmitted]="(timeSheetForm?.timeSheet.submitted)"
+                (deleteActivity)="timeSheetForm?.deleteActivity($event)"
+                (addActivity)="timeSheetForm?.addActivity()"></app-activity>
+        </mat-list>
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="!timeSheetForm?.timeSheet?.submitted">
         <button mat-button type="button" [disabled]="timeSheetForm?.pristine"
         (click)="save()">Save</button>
-        <button mat-button color="primary" type="button" [disabled]="timeSheetForm?.dirty || !timeSheetForm?.saved"
+        <button mat-button color="primary" type="button" [disabled]="timeSheetForm.invalid || timeSheetForm?.dirty || !timeSheetForm?.saved"
         (click)="submit()">Submit for approval</button>
     </mat-card-actions>
 
@@ -34,3 +37,12 @@
   </mat-card>
 
 </div>
+
+<ng-template #errorMessage>
+    <mat-card>
+        <p class="text-center">Oops, we can't find that time sheet!</p>
+        <mat-card-actions class="items-center">
+            <a routerLink="/timesheets/" color="accent" mat-raised-button>Back to Time Sheets</a>
+        </mat-card-actions>
+    </mat-card>
+</ng-template>

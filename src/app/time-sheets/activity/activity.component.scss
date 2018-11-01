@@ -1,0 +1,35 @@
+mat-list-item {
+    &:hover {
+        background-color: inherit !important;
+        cursor: auto !important;
+    }
+}
+
+mat-form-field {
+    margin: 15px 10px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#date:hover {
+    cursor: pointer;
+}
+#date input {
+    cursor: pointer;
+}
+#hourlyPay {
+    width: 9em;
+}
+#hours {
+    width: 3em;
+}
+#pay {
+    width: 6em;
+}

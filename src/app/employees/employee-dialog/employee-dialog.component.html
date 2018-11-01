@@ -3,21 +3,21 @@
   <mat-dialog-content>
     <mat-form-field>
       <input matInput type="text" placeholder="First Name" aria-label="First Name"
-      formControlName="firstName">
+      formControlName="firstName" (blur)="trim('firstName')">
       <mat-error *ngIf="employeeForm.controls['firstName'].invalid">
         {{getErrorMessage('firstName')}}</mat-error>
     </mat-form-field>
   
     <mat-form-field>
       <input matInput type="text" placeholder="Last Name" aria-label="Last Name"
-      formControlName="lastName">
+      formControlName="lastName" (blur)="trim('lastName')">
       <mat-error *ngIf="employeeForm.controls['lastName'].invalid">
         {{getErrorMessage('lastName')}}</mat-error>
     </mat-form-field>
   
     <mat-form-field id="email">
       <input matInput type="email" placeholder="Email" aria-label="Email"
-      formControlName="email">
+      formControlName="email" (blur)="trim('email')">
       <mat-error *ngIf="employeeForm.controls['email'].invalid">
         {{getErrorMessage('email')}}</mat-error>
     </mat-form-field>
@@ -25,6 +25,7 @@
     <mat-form-field>
       <input matInput type="number" placeholder="Hourly Pay" aria-label="Hourly Pay"
       formControlName="hourlyPay">
+      <span matPrefix>$&nbsp;</span>
       <mat-error *ngIf="employeeForm.controls['hourlyPay'].invalid">
         {{getErrorMessage('hourlyPay')}}</mat-error>
     </mat-form-field>

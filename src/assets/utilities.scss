@@ -1,0 +1,22 @@
+.col-sm {
+  min-width: 8em;
+  padding: 0 1em;
+}
+
+.col-full {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.items-center {
+  display: flex;
+  justify-content: center !important;
+  align-content: center;
+}

@@ -12,7 +12,8 @@ export class ActivityForm extends FormGroup {
     super({
       date: new FormControl(activity.date, {validators: Validators.required}),
       description: new FormControl(activity.description),
-      hours: new FormControl(activity.hours, {validators: Validators.required})
+      hours: new FormControl(activity.hours, 
+        {validators: [Validators.required, Validators.min(0), Validators.max(10)]})
     });
     
     this._id = activity.id;

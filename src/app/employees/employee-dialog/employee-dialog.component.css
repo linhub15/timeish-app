@@ -21,6 +21,3 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-mat-dialog-actions {
-    justify-content: flex-end;
-}

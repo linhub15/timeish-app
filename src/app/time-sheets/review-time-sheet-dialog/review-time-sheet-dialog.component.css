@@ -11,7 +11,3 @@ h2 {
 table {
     width: 450px;
 }
-
-mat-dialog-actions {
-    justify-content: flex-end;
-}

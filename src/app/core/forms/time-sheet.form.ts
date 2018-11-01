@@ -18,7 +18,7 @@ export class TimeSheetForm extends FormGroup {
         this.timeSheet = timeSheet;
         this.saved = true;
         this._activities = <FormArray>this.controls['activities'];
-        this._initForm();    
+        this._initForm();
     }
 
     addActivity() {
@@ -35,9 +35,9 @@ export class TimeSheetForm extends FormGroup {
         this._saved(false);
     }
 
-    saveChanges(apiService: TimeSheetsService) {
+    saveChanges(apiService: TimeSheetsService): boolean {
         this.markFormTouched(this);
-        if(this.invalid) { return }
+        if (this.invalid) { return false; }
 
         const forms = <ActivityForm[]>this._activities.controls;
         const changes = ActivityForm.toActivity(forms);
@@ -45,6 +45,7 @@ export class TimeSheetForm extends FormGroup {
         this._deleteDifferences(changes, apiService);
         apiService.update(this.timeSheet).subscribe();
         this._saved();
+        return true;
     }
 
     submitTimeSheet(apiService: TimeSheetsService) {
@@ -52,6 +53,7 @@ export class TimeSheetForm extends FormGroup {
         if(this.invalid) { return }
         this.timeSheet.submitted = new Date();
         apiService.update(this.timeSheet).subscribe();
+        this._saved();
     }
 
     // Temporary fix for angular/angular#19400

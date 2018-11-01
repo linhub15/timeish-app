@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { ActivityForm } from 'src/app/core';
+
+import { ActivityForm } from '../../core';
 
 export const MY_FORMATS = {
   parse: {
@@ -18,7 +19,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.css'],
+  styleUrls: ['./activity.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
@@ -49,11 +50,19 @@ export class ActivityComponent implements OnInit, OnChanges {
     }
   }
 
-  delete(): void {
+  getErrorMessage(formControlName: string) : string {
+    const control = this.activityForm.controls[formControlName];
+    if (control.hasError('required')) { return 'Required' }
+    else if (control.hasError('min')) { return 'Must be 0 or greater'}
+    else if (control.hasError('max')) { return 'Must be 10 or less'}
+    else { return '' }
+  }
+
+  delete() {
     this.deleteActivity.emit(this.activityForm.value);
   }
 
-  add(): void {
+  add() {
     this.addActivity.emit(true);
   }
 

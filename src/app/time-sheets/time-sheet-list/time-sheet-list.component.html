@@ -1,29 +1,42 @@
-<div *ngFor="let timeSheet of timeSheets">
+<div class="container">
 
-  <mat-card class="flex-row" mat-ripple (click)="openReviewDialog(timeSheet)">
-    <div class="timeSheet">
+  <mat-card>
 
-      <h3 class="name">{{timeSheet.employee.fullName()}}</h3>
+    
 
-      <span>${{timeSheet.totalPay()}}</span>
+    <mat-card-content class="list">
+      <mat-list role="rowgroup">
+        <h2 mat-subheader>Time Sheets ({{timeSheets?.length}})</h2>
+        <mat-list-item *ngFor="let timeSheet of timeSheets"
+            mat-ripple (click)="openReviewDialog(timeSheet)">
 
-      <mat-chip-list>
-        <mat-chip>{{timeSheet.status()}}</mat-chip>
-      </mat-chip-list>
+          <div class="col-sm">{{timeSheet.employee.fullName()}}</div>
+          <div class="col-full"></div>
+          <div class="col-sm">${{timeSheet.totalPay()}}</div>
+          <mat-chip-list class="col-sm items-center">
+            <mat-chip>{{timeSheet.status()}}</mat-chip>
+          </mat-chip-list>
 
-    </div>
+          <div class="list-actions">
+            <button mat-icon-button 
+                routerLink="/timesheets/{{timeSheet.id}}"
+                [disabled]="timeSheet.status() === 'Submitted' || timeSheet.status() === 'Approved'">
+              <mat-icon>edit</mat-icon></button>
 
-    <div class="card-actions">
-      <button mat-icon-button
-          routerLink="/timesheets/{{timeSheet.id}}"
-          [disabled]="timeSheet.status() === 'Submitted' || timeSheet.status() === 'Approved'">
-        <mat-icon>edit</mat-icon></button>
-      <button mat-icon-button color="warning"
-          (click)="deleteTimeSheet(timeSheet)">
-        <mat-icon>delete</mat-icon></button>
-    </div>
+            <button mat-icon-button color="warning"
+                (click)="deleteTimeSheet(timeSheet);$event.stopPropagation()">
+              <mat-icon>delete</mat-icon></button>
+          </div>
+
+        </mat-list-item>
+
+
+      </mat-list>
+    </mat-card-content>
+
   </mat-card>
 
 </div>
-<button id="addTimeSheet" mat-fab color="primary" aria-label="Add Time Sheet"
-    (click)="openAddDialog()"><mat-icon>add</mat-icon></button>
+
+<button class="fab-btn-fixed" mat-fab color="primary" aria-label="Add Time Sheet"
+(click)="openAddDialog()"><mat-icon>add</mat-icon></button>

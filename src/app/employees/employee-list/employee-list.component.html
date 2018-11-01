@@ -1,19 +1,31 @@
 <div class="container">
-  <h2 class="list-count">Employees ({{employees?.length}})</h2>
-  <mat-list role="rowgroup">
-    <mat-list-item #employees *ngFor="let employee of employees" (click)="openEditDialog(employee)">
-      <div class="list-item">
-          <div class="name">{{employee.fullName()}}</div>
-          <div class="email">{{employee.email}}</div>
-          <div class="pay">${{employee.hourlyPay}} / Hour</div>
-          <button class="icon-btn" mat-icon-button
-            (click)="deleteEmployee(employee)">
-            <mat-icon matListIcon>delete</mat-icon></button>
-    </div>
-    </mat-list-item>
-  </mat-list>
-</div>
+  
+  <mat-card>
 
-<button id="addNewEmployee" (click)="openAddDialog()"
-    mat-fab color="primary">
-  <mat-icon>add</mat-icon></button> 
+
+    <mat-card-content class="list">
+        <mat-list role="rowgroup">
+            <h2 mat-subheader>Employees ({{employees?.length}})</h2>
+            <mat-list-item *ngFor="let employee of employees"
+                mat-ripple (click)="openEditDialog(employee)">
+
+
+              <div class="col-sm">{{employee.fullName()}}</div>
+              <div class="col-full">{{employee.email}}</div>
+              <div class="col-sm">${{employee.hourlyPay}} / Hour</div>
+              
+              <div class="list-actions">
+                <button mat-icon-button (click)="deleteEmployee(employee);$event.stopPropagation()">
+                    <mat-icon matListIcon>delete</mat-icon></button>
+              </div>
+
+
+            </mat-list-item>
+          </mat-list>
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
+<button class="fab-btn-fixed" (click)="openAddDialog()" mat-fab color="primary">
+<mat-icon>add</mat-icon></button> 

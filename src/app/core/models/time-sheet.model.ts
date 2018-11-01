@@ -20,6 +20,7 @@ export class TimeSheet implements Deserializable{
     }
 
     deserialize(input: any) {
+        if (!input) { console.error('deserialize(): required parameter'); return }
         input.employee = new Employee().deserialize(input.employee);
         input.payPeriod = new PayPeriod().deserialize(input.payPeriod);
         return Object.assign(this, input);

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 
 import { TimeSheet } from '../models';
 import { ApiService } from './api.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TimeSheetsService {
@@ -12,32 +13,27 @@ export class TimeSheetsService {
 
   constructor(private http: ApiService) { }
 
-  // GET /api/timesheets
   list(): Observable<TimeSheet[]> {
     return this.http.list(this.resource, TimeSheet);
   }
 
-  // GET /api/timesheets/{id}
   get(id: number): Observable<TimeSheet> {
-    return this.http.get<TimeSheet>(this.resource, id, TimeSheet);
+    return this.http.get<TimeSheet>(this.resource, id, TimeSheet)
   }
 
-  // POST
   add(timeSheet: TimeSheet): Observable<TimeSheet> {
     return this.http.add(this.resource, timeSheet, TimeSheet);
   }
 
-  // PUT
   update(timeSheet: TimeSheet): Observable<TimeSheet> {
-    return this.http.update(this.resource, timeSheet, TimeSheet);
+    return this.http.put(this.resource, timeSheet, TimeSheet);
   }
 
-  // DELETE
   deleteTimeSheet(id: number): void {
     this.http.delete(this.resource, id).subscribe();
   }
 
-  // DELETE
+  // Activity is related to Timesheet. One method doesn't warrant it's own service.
   deleteActivity(id: number): void {
     let resource = this.resource + '/activities';
     this.http.delete(resource, id).subscribe();

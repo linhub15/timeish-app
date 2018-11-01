@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./assets/mat-card-list.scss";
+@import "./assets/utilities.scss";
 
 html, body {
     height: 100%;
@@ -15,8 +17,18 @@ body {
 .container {
     padding: 10px;
 }
-.list-count {
-    color: rgba(0,0,0,0.87);
-    font: 400 14px/20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+
+button.fab-btn-fixed {
+    position: fixed;
+    right: 30px;
+    bottom: 25px;
 }
 
+mat-card {
+    max-width: 1080px;
+    margin: 4em auto;
+}
+
+mat-dialog-actions {
+    justify-content: flex-end;
+}

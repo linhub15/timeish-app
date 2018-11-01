@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
 
 import { TimeSheetsService, TimeSheetForm } from '../../core';
+import { SnackBarService, WarningDialogComponent, WarningDialogData } from '../../shared';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class TimeSheetComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: TimeSheetsService,
-    public snackBar: MatSnackBar
+    public dialog: MatDialog,
+    public snackBar: SnackBarService
   ) { }
 
   ngOnInit() {
@@ -27,14 +29,27 @@ export class TimeSheetComponent implements OnInit {
         this.timeSheetForm = new TimeSheetForm(timeSheet));
   }
 
-
   save() {
-    this.timeSheetForm.saveChanges(this.apiService);
-    this.snackBar.open('Time sheet saved!', '',{duration: 2500});
+    const saved = this.timeSheetForm.saveChanges(this.apiService);
+    if (saved) {
+      this.snackBar.open('Saved!');
+    }
+    else { this.snackBar.open('Validation Errors')}
+    
   }
 
   submit() {
-    this.timeSheetForm.submitTimeSheet(this.apiService);
-    this.snackBar.open('Time sheet submitted for approval', '',{duration: 2500});
+    const dialogRef = this.dialog.open(WarningDialogComponent, {
+      autoFocus: false,
+      data: {
+        message: 'No more changes can be made after submitting.',
+        submitColor: 'primary'
+      }
+    });
+    dialogRef.afterClosed().subscribe(submitted => {
+      if (!submitted) {return}
+      this.timeSheetForm.submitTimeSheet(this.apiService);
+      this.snackBar.open('Submitted!');
+    })
   }
 }

@@ -9,7 +9,7 @@
   </mat-form-field>
 
 
-  <mat-form-field id="description" floatLabel="never">
+  <mat-form-field class="col-full" floatLabel="never">
     <input matInput formControlName="description"
         placeholder="Description (Optional)" type="text">
   </mat-form-field>
@@ -18,18 +18,18 @@
   <mat-form-field floatLabel="never" id="hourlyPay">
     <input matInput formControlName="hours"
         id="hours" type="number" placeholder="Hours">
-    <mat-error *ngIf="activityForm.controls['hours'].invalid">Required</mat-error>
-    <div matSuffix id="pay" matTooltip="Pay" matTooltipPosition="above">
+    <mat-error *ngIf="activityForm.controls['hours'].invalid">{{getErrorMessage('hours')}}</mat-error>
+    <div *ngIf="activityForm?.controls['hours'].valid || isSubmitted" matSuffix id="pay">
       {{showPay()}}</div>
   </mat-form-field>
 
   
-  <div class="list-item-actions" *ngIf="!isSubmitted">
-      <button class="hidden-btn" mat-icon-button
-      (click)="delete()" color="warn"><mat-icon>clear</mat-icon></button>
+  <div class="list-actions" *ngIf="!isSubmitted">
+      <button mat-icon-button color="warn"
+      (click)="delete()"><mat-icon>clear</mat-icon></button>
     
-      <button class="hidden-btn" mat-icon-button
-      (click)="add()" color="primary"><mat-icon>add</mat-icon></button>
+      <button mat-icon-button color="primary"
+      (click)="add()"><mat-icon>add</mat-icon></button>
   </div>
   
 </mat-list-item>

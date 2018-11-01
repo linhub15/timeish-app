@@ -2,9 +2,9 @@
 <mat-sidenav-container (backdropClick)="closeSideNav()">
     <mat-sidenav #sidenav>
         <mat-nav-list>
-            <mat-list-item *ngFor="let link of links">
-                <a matLine routerLink="{{link.url}}" (click)="closeSideNav()">{{link.text}}</a>
-            </mat-list-item>
+            <a mat-list-item *ngFor="let link of links" routerLink="{{link.url}}" (click)="closeSideNav()">
+                {{link.text}}
+            </a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

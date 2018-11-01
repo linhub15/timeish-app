@@ -10,7 +10,9 @@ export class EmployeeService implements OnInit {
   readonly resource: string = 'employees'
 
   constructor(private api: ApiService) { }
-  ngOnInit() {}
+
+  ngOnInit() { }
+
   getEmployees(): Observable<Employee[]> {
     return this.api.list<Employee>(this.resource, Employee);
   }
@@ -24,6 +26,6 @@ export class EmployeeService implements OnInit {
   }
 
   update(employee: Employee): Observable<any> {
-   return this.api.update(this.resource, employee, Employee);
+   return this.api.put(this.resource, employee, Employee);
   }
 }

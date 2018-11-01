@@ -1,0 +1,29 @@
+mat-card-content.list {
+  mat-list-item {
+      .list-actions {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-evenly;
+          margin-left: 2em;
+          
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0s, opacity 0.14s linear;
+      }
+      &:hover {
+          background-color: #f5f5f5;
+          cursor: pointer;
+
+          .list-actions {
+              visibility: visible;
+              opacity: 1;
+          }
+      }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+    .list-actions {
+        display: none;
+    }
+}

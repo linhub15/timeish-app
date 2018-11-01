@@ -1,9 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 import { Employee } from '../../core';
-
+import { CustomValidators } from '../../shared/custom-validators';
 
 export class EmployeeDialogData {
   title: string;
@@ -11,24 +12,32 @@ export class EmployeeDialogData {
   submitAction: string;
 }
 
-
 @Component({
   selector: 'app-employee-dialog',
   templateUrl: './employee-dialog.component.html',
   styleUrls: ['./employee-dialog.component.css'],
 })
-export class EmployeeDialogComponent {
+export class EmployeeDialogComponent implements OnInit {
   employeeForm = new FormGroup({
     firstName: new FormControl(this.data.employee.firstName, 
-      Validators.required),
+      [Validators.required, CustomValidators.noWhiteSpace]),
     lastName: new FormControl(this.data.employee.lastName, 
-      Validators.required),
+      [Validators.required, CustomValidators.noWhiteSpace]),
     email: new FormControl(this.data.employee.email, 
-      [Validators.required, Validators.email]),
+      [Validators.required, Validators.email, CustomValidators.noWhiteSpace]),
     hourlyPay: new FormControl(this.data.employee.hourlyPay, 
       [Validators.required, Validators.min(0), Validators.max(100)])
   });
 
+  ngOnInit() {
+    const firstNameControl = this.employeeForm.get('firstName');
+    firstNameControl.valueChanges
+      .pipe(map(val => val.trim()),
+      )
+      .subscribe();
+    this.employeeForm.get('lastName').valueChanges
+      .pipe(map(value => value.trim()))
+  }
 
   constructor(
     public dialogRef: MatDialogRef<EmployeeDialogComponent>,
@@ -46,6 +55,12 @@ export class EmployeeDialogComponent {
     else if (control.hasError('email')) { return 'Not a valid email' }
     else if (control.hasError('min')) { return 'Must be 0 or greater'}
     else if (control.hasError('max')) { return 'Must be 100 or less'}
+    else if (control.hasError('hasWhiteSpace')) { return 'No leading/trailing spaces'}
     else { return '' }
+  }
+
+  trim(formControlName: string) {
+    const control = this.employeeForm.controls[formControlName];
+    control.setValue(control.value.trim());
   }
 }

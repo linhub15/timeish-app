@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <h3>{{data.title}}</h3>
+  <p>{{data.message}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="{{data.submitColor}}" (click)="submit()">{{data.submitAction}}</button>
+</mat-dialog-actions>
