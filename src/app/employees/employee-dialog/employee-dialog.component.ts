@@ -50,6 +50,7 @@ export class EmployeeDialogComponent {
 
   trim(formControlName: string) {
     const control = this.employeeForm.controls[formControlName];
+    if (!control.value) { return }
     control.setValue(control.value.trim());
   }
 }
