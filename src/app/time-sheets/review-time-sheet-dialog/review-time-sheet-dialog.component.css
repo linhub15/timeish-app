@@ -11,3 +11,8 @@ h2 {
 table {
     width: 450px;
 }
+
+.actions {
+    display: flex;
+    flex-basis: auto;
+}

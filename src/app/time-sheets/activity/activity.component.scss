@@ -1,4 +1,5 @@
 mat-list-item {
+    padding-bottom: 15px;
     &:hover {
         background-color: inherit !important;
         cursor: auto !important;
@@ -6,7 +7,7 @@ mat-list-item {
 }
 
 mat-form-field {
-    margin: 15px 10px;
+    margin: 0 10px;
 }
 
 input[type='number'] {

@@ -1,4 +1,5 @@
 mat-card-content.list {
+    overflow: auto !important;
   mat-list-item {
       .list-actions {
           display: flex;

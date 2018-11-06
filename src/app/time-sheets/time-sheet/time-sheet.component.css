@@ -7,3 +7,9 @@ mat-card-actions {
     display: flex;
     justify-content: flex-end;
 }
+
+mat-list {
+    padding-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}

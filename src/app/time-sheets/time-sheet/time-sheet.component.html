@@ -1,4 +1,4 @@
-<div *ngIf="timeSheetForm?.timeSheet; else errorMessage">
+<div *ngIf="timeSheetForm?.timeSheet; else loading">
 
   <mat-card [formGroup]="timeSheetForm">
 
@@ -37,7 +37,9 @@
   </mat-card>
 
 </div>
-
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>
 <ng-template #errorMessage>
     <mat-card>
         <p class="text-center">Oops, we can't find that time sheet!</p>
