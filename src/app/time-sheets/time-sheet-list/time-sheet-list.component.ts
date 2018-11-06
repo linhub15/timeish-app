@@ -12,7 +12,7 @@ import { SnackBarService, WarningDialogComponent } from '../../shared';
   styleUrls: ['./time-sheet-list.component.css']
 })
 export class TimeSheetListComponent implements OnInit {
-  timeSheets: TimeSheet[] = [];
+  timeSheets: TimeSheet[];
   
   constructor(
     private timeSheetService:TimeSheetsService,

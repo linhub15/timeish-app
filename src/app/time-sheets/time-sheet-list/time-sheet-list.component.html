@@ -1,8 +1,6 @@
-<div class="container">
+<div class="container" *ngIf="timeSheets; else loading">
 
   <mat-card>
-
-    
 
     <mat-card-content class="list">
       <mat-list role="rowgroup">
@@ -40,3 +38,7 @@
 
 <button class="fab-btn-fixed" mat-fab color="primary" aria-label="Add Time Sheet"
 (click)="openAddDialog()"><mat-icon>add</mat-icon></button>
+
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
