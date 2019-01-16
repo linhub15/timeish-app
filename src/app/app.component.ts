@@ -13,13 +13,14 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
   navTitle: string;
   links: Link[] = [];
+  authenticated: boolean = true;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.links.push(new Link('/timesheets', 'Time Sheets'));
     this.links.push(new Link('/employees', 'Employees'));
     this.router.events.pipe(

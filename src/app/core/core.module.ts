@@ -5,7 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
 /* Components */
-import { ApiService, EmployeeService, TimeSheetsService } from './services';
+import { ApiService, AuthService, EmployeeService, JwtService, TimeSheetsService } from './services';
 
 
 @NgModule({
@@ -13,7 +13,9 @@ import { ApiService, EmployeeService, TimeSheetsService } from './services';
   providers: [
     ApiService, 
     EmployeeService, 
-    TimeSheetsService
+    TimeSheetsService,
+    JwtService,
+    AuthService,
   ],
   declarations: [],
   exports: []

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 /* Feature Modules */
 import { CoreModule } from './core';
 import { SharedModule } from './shared/shared.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 import { TimeSheetsModule } from './time-sheets/time-sheets.module';
 import { EmployeesModule } from './employees/employees.module';
 
@@ -19,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     CoreModule,
     SharedModule,
+    AuthenticationModule,
     TimeSheetsModule,
     EmployeesModule,
     AppRoutingModule,

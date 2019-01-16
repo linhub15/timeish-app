@@ -1,13 +1,19 @@
-<app-toolbar (toggleSidenav)="toggleSideNav($event)" title="{{navTitle}}"></app-toolbar>
-<mat-sidenav-container (backdropClick)="closeSideNav()">
-    <mat-sidenav #sidenav>
-        <mat-nav-list>
-            <a mat-list-item *ngFor="let link of links" routerLink="{{link.url}}" (click)="closeSideNav()">
-                {{link.text}}
-            </a>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div *ngIf="authenticated; else login">
+    <app-toolbar (toggleSidenav)="toggleSideNav($event)" title="{{navTitle}}"></app-toolbar>
+    <mat-sidenav-container (backdropClick)="closeSideNav()">
+        <mat-sidenav #sidenav>
+            <mat-nav-list>
+                <a mat-list-item *ngFor="let link of links" routerLink="{{link.url}}" (click)="closeSideNav()">
+                    {{link.text}}
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+
+<ng-template #login>
+    <app-login></app-login>
+</ng-template>
