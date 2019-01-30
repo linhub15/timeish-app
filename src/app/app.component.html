@@ -1,4 +1,4 @@
-<div *ngIf="authenticated; else login">
+<div *ngIf="authenticated$ | async; else login">
     <app-toolbar (toggleSidenav)="toggleSideNav($event)" title="{{navTitle}}"></app-toolbar>
     <mat-sidenav-container (backdropClick)="closeSideNav()">
         <mat-sidenav #sidenav>

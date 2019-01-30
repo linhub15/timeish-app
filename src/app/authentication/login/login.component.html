@@ -1,15 +1,13 @@
-<mat-card>
+<mat-card [formGroup]="loginForm">
     <mat-card-title class="text-center">Timeish</mat-card-title>
   <mat-form-field>
-    <input matInput placeholder="Username" type="text">
+    <input matInput placeholder="Username" type="text" formControlName="userName">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Password" type="password">
+    <input matInput placeholder="Password" type="password" formControlName="password">
   </mat-form-field>
 
-
-  <button mat-flat-button color="primary">Log in</button>
-
+  <button mat-flat-button color="primary" (click)="login()">Log in</button>
 
 </mat-card>
