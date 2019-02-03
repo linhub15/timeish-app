@@ -1,6 +1,8 @@
 # Timeish App - a small business time sheet management web app
 
 The backend API can be found [here](https://github.com/tymish/api)
+* Make sure MySQL Server is running
+* Make sure the tymish/api is running on `localhost:5001/api`
 
 ## Installation
 * Download latest Node.js LTS version [Here](https://nodejs.org/en/)
@@ -10,4 +12,6 @@ The backend API can be found [here](https://github.com/tymish/api)
 * Update node_modules `npm update`
 * Run application `ng serve`
 
-* Set `authenticated: boolean = true;` in app.component.ts to view app
+## App Login
+* User Name: `bob`
+* Password: `password`
